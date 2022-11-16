@@ -2,7 +2,7 @@ This module will deploy the ground floor networking for Tenant management networ
 
 Each network deploys a per defined `public_subnets` and will deploy a DHCP subnet using the range of first usable to second last usable. The network gateway will be the first usable address and the DHCP server resides on last usable before broadcast.
 
-```
+```mermaid
 graph TD
 subgraph inf[Existing Infrastructure]
 t0[T0 Router]
