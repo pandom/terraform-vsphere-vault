@@ -1,6 +1,6 @@
 module "networks" {
   source  = "app.terraform.io/burkey/quickstart-module/nsx"
-  version = "0.0.6"
+  version = "0.0.7"
 
   create_dhcp_server = true
   environment = var.environment
