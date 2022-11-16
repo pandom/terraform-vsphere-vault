@@ -1,4 +1,4 @@
-module "quickstart-module" {
+module "networks" {
   source  = "app.terraform.io/burkey/quickstart-module/nsx"
   version = "0.0.6"
 
