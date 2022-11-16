@@ -2,6 +2,7 @@ module "quickstart-module" {
   source  = "app.terraform.io/burkey/quickstart-module/nsx"
   version = "0.0.6"
 
+
   create_dhcp_server = true
   environment = var.environment
   private_subnets = [
@@ -14,6 +15,7 @@ module "quickstart-module" {
     "10.0.3.64/28",
     "10.0.3.80/28"
   ]
-  
+
+  create_dhcp_server = true
 
 }
