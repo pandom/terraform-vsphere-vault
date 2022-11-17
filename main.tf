@@ -1,6 +1,7 @@
 locals {
   vsphere_data = var.vsphere_data[var.environment]
   networks = nonsensitive(data.tfe_outputs.networks.values.public_networks)
+  local_network = "seg-general"
 }
 
 
@@ -13,7 +14,8 @@ module "vault" {
   cluster           = local.vsphere_data.cluster
   primary_datastore = local.vsphere_data.primary_datastore
   networks = {
-    "${local.networks[count.index]}" : "dhcp"
+    local_network = "seg-general"
+    #"${local.networks[count.index]}" : "dhcp"
     #"${data.tfe_outputs.networks.values.public_networks[count.index]}" : "dhcp"
     # "${module.networks.public_networks[count.index]}" : "dhcp"
   }
@@ -32,7 +34,8 @@ module "ipam" {
   cluster           = local.vsphere_data.cluster
   primary_datastore = local.vsphere_data.primary_datastore
   networks = {
-    "${local.networks[count.index]}" : "dhcp"
+    #"${local.networks[count.index]}" : "dhcp"
+     local_network = "seg-general"
     #"${data.tfe_outputs.networks.values.public_networks[count.index]}" : "dhcp"
     # "${module.networks.public_networks[count.index]}" : "dhcp"
   }
@@ -51,7 +54,8 @@ module "ldap" {
   cluster           = local.vsphere_data.cluster
   primary_datastore = local.vsphere_data.primary_datastore
   networks = {
-    "${local.networks[count.index]}" : "dhcp"
+    local_network = "seg-general"
+    #"${local.networks[count.index]}" : "dhcp"
     #"${data.tfe_outputs.networks.values.public_networks[count.index]}" : "dhcp"
     # "${module.networks.public_networks[count.index]}" : "dhcp"
   }
