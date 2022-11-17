@@ -10,7 +10,7 @@ terraform {
       version = "2.2.0"
     }
     tfe = {
-      source = "hashicorp/tfe"
+      source  = "hashicorp/tfe"
       version = "0.38.0"
     }
   }
@@ -27,6 +27,6 @@ provider "vsphere" {
 }
 
 provider "tfe" {
-  
+
 }
 

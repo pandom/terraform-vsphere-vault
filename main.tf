@@ -1,20 +1,21 @@
 locals {
-  vsphere_data = var.vsphere_data[var.environment]
-  networks = nonsensitive(data.tfe_outputs.networks.values.public_networks)
+  vsphere_data  = var.vsphere_data[var.environment]
+  networks      = nonsensitive(data.tfe_outputs.networks.values.public_networks)
   local_network = "seg-general"
 }
 
 
 module "vault" {
 
-  source            = "github.com/terraform-vsphere-modules/terraform-vsphere-virtual-machine"
+  source = "github.com/terraform-vsphere-modules/terraform-vsphere-virtual-machine"
   #tags = ["${vsphere_tag.managed}"]
   count             = var.count_index
   datacenter        = local.vsphere_data.datacenter
   cluster           = local.vsphere_data.cluster
   primary_datastore = local.vsphere_data.primary_datastore
   networks = {
-    local_network = "seg-general"
+    "${local.local_network}" : "dhcp"
+
     #"${local.networks[count.index]}" : "dhcp"
     #"${data.tfe_outputs.networks.values.public_networks[count.index]}" : "dhcp"
     # "${module.networks.public_networks[count.index]}" : "dhcp"
@@ -35,7 +36,9 @@ module "ipam" {
   primary_datastore = local.vsphere_data.primary_datastore
   networks = {
     #"${local.networks[count.index]}" : "dhcp"
-     local_network = "seg-general"
+    "${local.local_network}" : "dhcp"
+
+
     #"${data.tfe_outputs.networks.values.public_networks[count.index]}" : "dhcp"
     # "${module.networks.public_networks[count.index]}" : "dhcp"
   }
@@ -54,7 +57,8 @@ module "ldap" {
   cluster           = local.vsphere_data.cluster
   primary_datastore = local.vsphere_data.primary_datastore
   networks = {
-    local_network = "seg-general"
+    "${local.local_network}" : "dhcp"
+
     #"${local.networks[count.index]}" : "dhcp"
     #"${data.tfe_outputs.networks.values.public_networks[count.index]}" : "dhcp"
     # "${module.networks.public_networks[count.index]}" : "dhcp"
